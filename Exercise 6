@@ -1,0 +1,7 @@
+#!/bin/bash
+mkdir -p "$backup_dir"
+backup_dir="/home/mostafa/backup"
+backup_filename="backup_$(date "+%Y%m%d%H%M%S").tar.gz"
+tar -czf "$backup_dir/$backup_filename" "$HOME" &>/dev/null
+
+echo "Backup created: $backup_dir/$backup_filename"
