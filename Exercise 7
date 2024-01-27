@@ -1,0 +1,11 @@
+while IFS= read -r ip; do
+    ping -c 1 "$ip" > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        echo "$(date "+%Y-%m-%d %H:%M:%S") - $ip is pingable" >> "$log_file"
+    else
+        echo "$(date "+%Y-%m-%d %H:%M:%S") - $ip is not reachable" >> "$log_file"
+    fi
+done < "$IP_LIST"
+
+echo "Ping results saved to $log_file"
