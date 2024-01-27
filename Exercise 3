@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <Server_IP> <Username> <Path_On_Server>"
+    exit 1
+fi
+
+SERVER_IP="$1"
+USERNAME="$2"
+PATH_ON_SERVER="$3"
+
+if ping -c 1 -W 1 "$SERVER_IP" &> /dev/null; then
+    echo "Server $SERVER_IP is pingable."
+
+     sshpass -p '123' scp /etc/passwd "$USERNAME@$SERVER_IP:$PATH_ON_SERVER"
+    echo "File copied successfully."
+else
+    echo "Server $SERVER_IP is not accessible."
+fi
