@@ -1,0 +1,13 @@
+#!/bin/bash
+
+read -p "What is your favorite OS? " MY_OS
+
+MY_OS=$(echo "$MY_OS" | tr '[:upper:]' '[:lower:]' | tr -d '[:digit:]' | tr -d '[:blank:]' | tr -d '[:punct:]')
+
+if [ "$MY_OS" = "linux" ] || [ "$MY_OS" = "unix" ] || [ "$MY_OS" = "mac" ]; then
+   echo "Happy to hear that"
+elif [ "$MY_OS" = "windows" ]; then
+   echo "Shame on you..."
+else
+   echo "Good for you"
+fi
