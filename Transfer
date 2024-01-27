@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ "$#" -ne 5 ]; then
+    echo "Usage: $0 USER PASS IP SOURCE DESTINATION"
+    exit 1
+fi
+
+USER=$1
+PASS=$2
+IP=$3
+SOURCE=$4
+DESTINATION=$5
+
+############################################ temporary script for sftp ##################################################
+TMP_SCRIPT=$(mktemp)
+echo "lcd $SOURCE" >> "$TMP_SCRIPT"
+echo "cd $DESTINATION" >> "$TMP_SCRIPT"
+echo "put *.*" >> "$TMP_SCRIPT"
+echo "bye" >> "$TMP_SCRIPT"
+
+############################################ Use sftp with the temporary script ##########################################
+sftp -oBatchMode=no -b "$TMP_SCRIPT" "$USER@$IP" <<EOF
+$PASS
+EOF
+
+############################################ Remove the temporary script #################################################
+rm -f "$TMP_SCRIPT"
