@@ -1,10 +1,12 @@
 #!/bin/bash
-read -p "Please Enter Your IP: " IP
-ping -c 1 $IP >> /dev/null
-if [ $? -eq 0 ]
-then
-    echo "Server $IP is pingable!"
+
+read -p "Please enter the IP :" IP
+
+ping -c 1 $IP
+
+if [ $? -eq 0 ];then
+        echo "this IP is reachabel"
 else
-    echo "Server $IP is down..."
-    mail -s "$IP is Down" root@host < /dev/null
+        echo "this IP is not reachable at the moment"
+
 fi
