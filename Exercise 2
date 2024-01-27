@@ -1,0 +1,29 @@
+#!/bin/bash
+
+SMALEST=0
+LARGEST=0
+SUM=0
+AVR=0
+
+for i in {1..20}
+do
+        read -p "Enter your number :" NUMBER
+        if [ $i -eq 1 ];then
+        SMALEST=$NUMBER
+fi
+        if [ $NUMBER -lt $SMALEST ];then
+                SMALEST=$NUMBER
+fi
+        if [ $i -eq 1 ];then
+        LARGEST=$NUMBER
+fi
+        if [ $NUMBER -gt $LARGEST ];then
+                LARGEST=$NUMBER
+fi
+        SUM=$[$NUMBER+$SUM]
+        AVR=`echo "scale=3; $SUM/20" | bc`
+done
+echo "The smalest number is $SMALEST"
+echo "the largest number is $LARGEST"
+echo "Sum is $SUM"
+echo "AVR is $AVR"
